@@ -1,117 +1,59 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+import React, { ScrollView } from 'react-native';
+import { SafeAreaView,View ,StyleSheet,FlatList,Text} from 'react-native';
+import Header from './Header.js';
+import Middle  from './middle.js';
+import Welcome from './Welcomepage.js';
+import Account from './account.js';
+import plans from './Plansdata.js';
+import PlanItem from './PlanItem.js';
+import Imageview from './imageview.js';
+import sellerdata from './sellerdata.js';
+import Footer from './footer.js';
+const App = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={styles.safeconatiner}>
+      <Header />
+      <ScrollView>
+      <Middle />
+      <Text style={styles.heading}>GET BETTER OPPORTUNITIES</Text>
+      <FlatList 
+      data={plans}
+      renderItem={({item})=><PlanItem plan={item}/>}
+      />
+      <Imageview/>
+      <Text style={styles.heading}>Top Sellers</Text>
+      <FlatList 
+      data={sellerdata}
+      renderItem={({item})=><PlanItem plan={item}/>}
+      />
+      <Text style={styles.heading}>Handpicked Items for you</Text>
+      <FlatList 
+      data={sellerdata}
+      renderItem={({item})=><PlanItem plan={item}/>}
+      />
+      <Footer/>
+      </ScrollView>
+      
+      {/* <Welcome/> */}
+      {/* <Account/> */}
     </View>
   );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+};
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  safeconatiner: {
+    flex: 1,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  heading:
+  {
+    width:207,
+    height:17,
+    fontFamily:'Montserrat',
+    fontWeight:'600',
+    fontSize:14,
+    lineHeight:17.07,
+    marginTop:32,
+    marginLeft:24,
   },
 });
 
